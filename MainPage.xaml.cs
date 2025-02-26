@@ -48,7 +48,7 @@
                 }
                 else
                 {
-                    if ((buttonClicked != lastClicked) && (buttonClicked.Text == lastClicked.Text))
+                    if ((buttonClicked != lastClicked) && (buttonClicked.Text == lastClicked.Text) && (!string.IsNullOrWhiteSpace(buttonClicked.Text)))
                     {
                         matchesFound++;
                         lastClicked.Text = " ";
