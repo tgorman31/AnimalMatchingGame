@@ -1,4 +1,6 @@
-﻿namespace AnimalMatchingGame
+﻿using System.Text;
+
+namespace AnimalMatchingGame
 {
     public partial class MainPage : ContentPage
     {
@@ -14,14 +16,14 @@
             PlayAgainButton.IsVisible = false;
 
             List<string> animalEmoji = [
-                    "🐶","🐶",
-                    "🐙","🐙",
-                    "🐡","🐡",
-                    "🐘","🐘",
-                    "🐳","🐳",
-                    "🐫","🐫",
-                    "🦘","🦘",
-                    "🦕","🦕",
+                    "😁","😁",
+                    "😃","😃",
+                    "😉","😉",
+                    "😍","😍",
+                    "😫","😫",
+                    "🤪","🤪",
+                    "😵‍💫","😵‍💫",
+                    "🥹","🥹",
                     
                 ];
 
@@ -32,7 +34,29 @@
                 button.Text = nextEmoji;
                 animalEmoji.RemoveAt(index);
             }
+
+            Dispatcher.StartTimer(TimeSpan.FromSeconds(.1), TimerTick);
+
         }
+
+        int tenthOfSecondsElapsed = 0;
+        private bool TimerTick()
+        {
+            if (!this.IsLoaded) return false;
+
+            tenthOfSecondsElapsed++;
+
+            TimeElapsed.Text = "Time Elapsed: " + (tenthOfSecondsElapsed / 10F).ToString("0.0s");
+
+            if (PlayAgainButton.IsVisible)
+            {
+                tenthOfSecondsElapsed = 0;
+                return false;
+            }
+
+            return true;
+        }
+
         Button lastClicked;
         bool findingMatch = false;
         int matchesFound;
